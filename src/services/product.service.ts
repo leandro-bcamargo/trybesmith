@@ -10,9 +10,16 @@ async function create(name: string, amount: string): Promise<ServiceResponse<Pro
 
   const product = await productModel.getById(insertId);
 
-  return {status: 'CREATED', data: product};
+  return { status: 'CREATED', data: product };
+}
+
+async function getAll(): Promise<ServiceResponse<Product[]>> {
+  const products = await productModel.getAll();
+
+  return { status: 'RETRIEVED', data: products }
 }
 
 export default {
   create,
+  getAll,
 }

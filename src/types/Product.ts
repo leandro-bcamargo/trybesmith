@@ -4,9 +4,3 @@ export type Product = {
   amount: string,
   orderId?: string,
 }
-
-// export type ProductCreated = {
-//   id: number,
-//   name: string,
-//   amount: string,
-// }

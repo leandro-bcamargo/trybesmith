@@ -14,14 +14,23 @@ async function create(name: string, amount: string): Promise<number> {
 }
 
 async function getById(id: number):Promise<Product> {
-  const [product] = await connection.execute<RowDataPacket[]>(`
+  const [[product]] = await connection.execute<RowDataPacket[]>(`
     SELECT * FROM Trybesmith.products WHERE ID = ? 
   `, [id]);
 
-  return product[0] as Product;
+  return product as Product;
+}
+
+async function getAll(): Promise<Product[]> {
+  const [products] = await connection.execute<RowDataPacket[]>(`
+    SELECT * FROM Trybesmith.products
+  `);
+
+  return products as Product[];
 }
 
 export default {
   create,
   getById,
+  getAll,
 }
