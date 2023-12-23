@@ -1,12 +1,12 @@
-import productModel from "../models/product.model";
+import { productModel } from "../models";
 import { Product } from "../types/Product";
 import ServiceResponse from "../types/ServiceResponse";
 import CustomError from "../utils/CustomError";
 
-async function create(name: string, amount: string): Promise<ServiceResponse<Product>> {
-  const insertId = await productModel.create(name, amount);
+async function create({ name, amount }: Product): Promise<ServiceResponse<Product>> {
+  const { insertId } = await productModel.create({ name, amount });
 
-  if (!insertId) throw new CustomError('NOT_FOUND', "Couldn't insert product");
+  if (!insertId) throw new CustomError('INVALID_DATA', "Couldn't insert product");
 
   const product = await productModel.getById(insertId);
 

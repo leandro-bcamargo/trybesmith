@@ -2,15 +2,14 @@ import { ResultSetHeader, RowDataPacket } from "mysql2";
 import { Product } from "../types/Product";
 import connection from "./connection";
 
-async function create(name: string, amount: string): Promise<number> {
+async function create({name, amount}: Product): Promise<ResultSetHeader> {
   const [product] = await connection.execute<ResultSetHeader>(`
     INSERT INTO Trybesmith.products (name, amount)
     VALUES (?, ?)
   `, [name, amount]);
 
-  // console.log('create model:', product);
 
-  return product.insertId;
+  return product;
 }
 
 async function getById(id: number):Promise<Product> {
