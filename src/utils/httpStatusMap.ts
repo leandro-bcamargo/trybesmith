@@ -3,7 +3,9 @@ export default function httpStatusMap(status: string): number {
     'INVALID_DATA': 400,
     'NOT_FOUND': 404,
     'CREATED': 201,
-    'RETRIEVED': 200,
+    'SUCCESSFUL': 200,
+    'UNAUTHORIZED': 401,
+    'GENERIC': 500,
   }
 
   return statusMap[status];

@@ -5,3 +5,5 @@ export type User = {
   level: number,
   password: string,
 }
+
+export type UserDB = Required<Pick<User, 'id'>> & Omit<User, 'id'>;

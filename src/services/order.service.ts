@@ -5,7 +5,7 @@ import ServiceResponse from "../types/ServiceResponse";
 async function getAll(): Promise<ServiceResponse<OrderWithProductsIds[]>> {
   const orders = await orderModel.getAll();
 
-  return { status: 'RETRIEVED', data: orders }
+  return { status: 'SUCCESSFUL', data: orders }
 }
 
 export default {

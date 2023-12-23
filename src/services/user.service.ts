@@ -8,7 +8,7 @@ async function create({ username, vocation, level, password }: User) {
 
   if (!insertId) throw new CustomError('INVALID_DATA', "Couldn't create user");
 
-  const token = jwtUtils.sign({ id: insertId });
+  const token = jwtUtils.sign({ id: insertId, username });
 
   return { status: 'CREATED', data: { token } };
 }

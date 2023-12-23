@@ -16,7 +16,7 @@ async function create({ name, amount }: Product): Promise<ServiceResponse<Produc
 async function getAll(): Promise<ServiceResponse<Product[]>> {
   const products = await productModel.getAll();
 
-  return { status: 'RETRIEVED', data: products }
+  return { status: 'SUCCESSFUL', data: products }
 }
 
 export default {
