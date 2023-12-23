@@ -13,7 +13,6 @@ function loginMiddleware(req: Request, res: Response, next: NextFunction) {
     if (type === 'any.required') {
       status = 'INVALID_DATA';
     }
-    console.log('status, message:', status, message)
     throw new CustomError(status, message)
   }
   next();

@@ -6,6 +6,7 @@ export default function httpStatusMap(status: string): number {
     'SUCCESSFUL': 200,
     'UNAUTHORIZED': 401,
     'GENERIC': 500,
+    'UNPROCESSABLE': 422,
   }
 
   return statusMap[status];
