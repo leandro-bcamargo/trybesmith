@@ -1,6 +1,6 @@
-import { RowDataPacket } from "mysql2";
+import { ResultSetHeader, RowDataPacket } from "mysql2";
 import connection from "./connection";
-import { Order, OrderWithProductsIds } from "../types/Order";
+import { CreatedOrder, OrderWithProductsIds } from "../types/Order";
 
 async function getAll(): Promise<OrderWithProductsIds[]> {
   const [orders] = await connection.execute<RowDataPacket[]>(`
@@ -16,6 +16,27 @@ async function getAll(): Promise<OrderWithProductsIds[]> {
   return orders as OrderWithProductsIds[];
 }
 
+async function create({ userId, productsIds }: CreatedOrder) {
+  const [{ insertId }] = await connection.execute<ResultSetHeader>(`
+    INSERT INTO Trybesmith.orders ( user_id) VALUES (?)
+  `, [userId]);
+
+  const updatePromises = productsIds.map(productId => {
+    return connection.execute<ResultSetHeader>(`
+      UPDATE Trybesmith.products 
+      SET order_id = ?
+      WHERE id = ? 
+    `, [insertId, productId])
+  })
+
+  const updates = await Promise.all(updatePromises);
+
+  const affectedRows = updates.map(([header]) => header.affectedRows);
+
+  return affectedRows;
+}
+
 export default {
   getAll,
+  create,
 }

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import createProductSchema from "./createProductSchema";
+import createProductSchema from "./schemas/createProductSchema";
 import CustomError from "../utils/CustomError";
 
 function createProductMiddleware(req: Request, res: Response, next: NextFunction) {

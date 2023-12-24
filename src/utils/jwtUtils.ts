@@ -17,7 +17,7 @@ function verify(token: string): TokenPayload {
 
     return payload as TokenPayload;
   } catch (error) {
-    throw error;
+    throw new CustomError('UNAUTHORIZED', 'Invalid token');
   }
 }
 

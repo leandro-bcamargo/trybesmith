@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { Login } from "../types/Login";
-import validateLoginSchema from "./validateLoginSchema";
+import validateLoginSchema from "./schemas/validateLoginSchema";
 import CustomError from "../utils/CustomError";
 
 function loginMiddleware(req: Request, res: Response, next: NextFunction) {
